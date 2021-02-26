@@ -28,7 +28,7 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/GabrielCoelho3498/project_template.git
+    cookiecutter https://github.com/CcgEpmq/project_template.git
 
 
 
