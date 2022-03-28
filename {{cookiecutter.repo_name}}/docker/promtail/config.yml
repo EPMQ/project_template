@@ -1,0 +1,35 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: kedro
+    pipeline_stages:
+      - match:
+          selector: '{job="kedro"}'
+          stages:
+            - regex:
+                expression: "^(?P<timestamp>[\\d\\s-:,]+)\\s\\-\\s(?P<name>[.\\w]+)\\s\\-\\s(?P<levelname>INFO|WARNING|ERROR)\\s\\-\\s(?P<content>.*)$"
+            - match:
+                selector: '{name!~"kedro"}'
+                action: drop
+                drop_counter_reason: not_kedro_log
+            - multiline:
+                firstline: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}'
+            - labels:
+                levelname:
+            - timestamp:
+                source: timestamp
+                format: ANSIC
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: kedro
+          __path__: /var/log/*.log
