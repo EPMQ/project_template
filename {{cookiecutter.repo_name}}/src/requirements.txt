@@ -18,7 +18,7 @@ kedro==0.17.7
     # dynaconf==3.1.5 # versions >3.1.6 break kedro as of october/2021
 
 # MLFLOW
-mlflow==1.17.0
+mlflow==1.23.1
     Flask<2.0.0
     jinja2<3.0.0
     boto3==1.18.18
