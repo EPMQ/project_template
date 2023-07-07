@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "template"
+version = "{{version}}"
+description = "{{project_short_description}}"
+authors = ["{{full_name}} <{{email}}>"]
+readme = "README.md"
+repository = "{{repository_url}}"
+license = "{{open_source_license}}"
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0"
+cookiecuter = "*"
+poetry = "*"
